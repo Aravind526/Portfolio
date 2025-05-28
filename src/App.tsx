@@ -125,7 +125,7 @@ function App() {
           <div className="md:w-1/2 flex justify-center">
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
               <img
-                src="/Aravind.jpg"
+                src={`${import.meta.env.BASE_URL}Aravind.jpg`}
                 alt="Aravind Ravichandran"
                 className="absolute inset-0 object-cover w-full h-full"
               />
@@ -290,7 +290,7 @@ function App() {
 
           <div className="mt-16 text-center">
             <a
-              href="/Aravind_Ravichandran_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}Aravind_Ravichandran_Resume.pdf`}
               download
               className="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition-colors duration-300"
             >
