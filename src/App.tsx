@@ -302,9 +302,9 @@ function App() {
                     <p className="text-gray-500">Jan 2022 – Dec 2022</p>
                   </div>
                   {/* <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
-                  <div className="order-2 md:order-1 md:w-1/2 md:pr-10 md:text-right">
-                    <div className="bg-white p-5 rounded-lg shadow-sm" data-aos="fade-left" data-aos-delay="200">
-                      <ul className="list-disc list-inside text-gray-700 space-y-2 md:list-outside md:ml-auto">
+                  <div className="order-2 md:order-1 md:w-1/2 md:pr-10">
+                    <div className="bg-white p-5 rounded-lg shadow-sm text-left" data-aos="fade-left" data-aos-delay="200">
+                      <ul className="list-disc list-inside text-gray-700 space-y-2">
                         <li>Developed scalable and efficient RESTful APIs using Spring Boot with MongoDB and PostgreSQL, improving response times by 30% and backend efficiency by 25%, while optimizing SQL and NoSQL queries across Oracle and DynamoDB</li>
                         <li>Implemented secure authentication and authorization using Spring Security, OAuth 2.0, and JWT; integrated Redis caching and connection pooling to reduce latency and enhance performance under high traffic</li>
                         <li>Built dynamic SPAs with Angular, integrated with Java-based APIs to enhance UI responsiveness and reduce page load time by 20%; automated API testing and documentation with TestNG and Swagger</li>
@@ -347,9 +347,9 @@ function App() {
                     <p className="text-gray-500">Jan 2018 – Feb 2019</p>
                   </div>
                   {/* <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
-                  <div className="order-2 md:order-1 md:w-1/2 md:pr-10 md:text-right">
-                    <div className="bg-white p-5 rounded-lg shadow-sm" data-aos="fade-left" data-aos-delay="200">
-                      <ul className="list-disc list-inside text-gray-700 space-y-2 md:list-outside md:ml-auto">
+                  <div className="order-2 md:order-1 md:w-1/2 md:pr-10">
+                    <div className="bg-white p-5 rounded-lg shadow-sm text-left" data-aos="fade-left" data-aos-delay="200">
+                      <ul className="list-disc list-inside text-gray-700 space-y-2">
                         <li>Developed and optimized MongoDB filter queries for efficient JSON data retrieval, improving performance by 30% and integrating the data seamlessly into the service layer</li>
                         <li>Built high-performance RESTful APIs using Node.js and implemented SPAs with React.js and Redux, leading to a 20% boost in user engagement and 15% faster page load times</li>
                         <li>Engineered reusable stateful and stateless React components, enhancing user experience by 25% and simplifying maintenance by 20% across frontend modules</li>
