@@ -2,6 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Github as GitHub, Linkedin, Mail, ExternalLink, Download } from 'lucide-react';
 import './App.css';
 import SkillBar from './components/SkillBar';
+import { TypeAnimation } from 'react-type-animation';
+import { motion } from 'framer-motion';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,9 +32,7 @@ function App() {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 10);
 
-      // Update active section based on scroll position
       const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
-
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -28,8 +45,21 @@ function App() {
       }
     };
 
+    // Attach scroll listener
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+      mirror: false,
+    });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -96,17 +126,46 @@ function App() {
       </div>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50 pt-20">
+      <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50 pt-20">
+        {/* AWS Certified Badge in top-right corner */}
+        <div className="absolute top-24 right-24 md:top-28 md:right-32 z-10">
+          <img
+            src="./public/aws_certified_image.png" // or direct URL
+            alt="AWS Certified Developer – Associate"
+            className="h-28 md:h-32 w-auto drop-shadow-xl hover:scale-105 transition-transform duration-300"
+            title="AWS Certified Developer – Associate"
+          />
+        </div>
+
         <div className="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-10 md:mb-0">
+          <motion.div
+            className="md:w-1/2 mb-10 md:mb-0"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               <span className="block">Hi, I'm</span>
               <span className="text-indigo-600 block">Aravind Ravichandran</span>
             </h1>
-            <h2 className="text-2xl md:text-3xl text-gray-600 mb-6">Fullstack Developer</h2>
+
+            <h2 className="text-2xl md:text-3xl text-gray-600 mb-6">
+              <TypeAnimation
+                sequence={[
+                  'Fullstack Developer', 2000,
+                  'Java Backend Engineer', 2000,
+                  'Cloud-native Specialist', 2000
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            </h2>
+
             <p className="text-lg text-gray-700 mb-8 max-w-lg">
-              I specialize in building scalable, high-performance backend systems and responsive web applications using modern technologies like Java, Spring Boot, Angular, React, and AWS. With over 5 years of experience across banking, healthcare, and e-commerce domains, I focus on delivering secure, cloud-native, and user-centric solutions.
+              I specialize in building scalable, high-performance backend systems and responsive web applications using modern technologies like Java, Spring Boot, Angular, React, and AWS...
             </p>
+
             <div className="flex space-x-4">
               <button
                 onClick={() => scrollToSection('contact')}
@@ -121,22 +180,29 @@ function App() {
                 View Projects
               </button>
             </div>
-          </div>
-          <div className="md:w-1/2 flex justify-center">
+          </motion.div>
+
+          <motion.div
+            className="md:w-1/2 flex justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
               <img
                 src={`${import.meta.env.BASE_URL}Aravind.jpg`}
                 alt="Aravind Ravichandran"
-                className="absolute inset-0 object-cover w-full h-full"
+                className="absolute inset-0 object-cover w-full h-full hover:scale-105 transition-transform duration-500"
               />
             </div>
-          </div>
-
+          </motion.div>
         </div>
       </section>
 
+
+
       {/* About Section */}
-      <section id="about" className="py-20 bg-white">
+      <section id="about" className="py-20 bg-white" data-aos="fade-up" data-aos-duration="1000">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">About Me</h2>
           <div className="flex flex-col md:flex-row items-center">
@@ -200,14 +266,14 @@ function App() {
                 {/* Walmart */}
                 <div className="relative flex flex-col md:flex-row items-center md:items-start">
                   <div className="order-1 md:order-1 md:w-1/2 pr-10 md:text-right mb-6 md:mb-0">
-                    <div className="hidden md:block absolute right-0 transform translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div>
+                    {/* <div className="hidden md:block absolute right-0 transform translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                     <h3 className="text-xl font-bold text-indigo-600">Full Stack Developer (Intern)</h3>
                     <p className="text-gray-700 font-medium">MetaState Bio-informatics System</p>
                     <p className="text-gray-500">Aug 2024 – Dec 2024</p>
                   </div>
-                  <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div>
+                  {/* <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                   <div className="order-2 md:order-2 md:w-1/2 md:pl-10">
-                    <div className="bg-white p-5 rounded-lg shadow-sm">
+                    <div className="bg-white p-5 rounded-lg shadow-sm" data-aos="fade-right" data-aos-delay="200">
                       <ul className="list-disc list-inside text-gray-700 space-y-2">
                         <li>Developed secure and scalable Spring Boot microservices with Spring Cloud and REST APIs, integrating OAuth2/JWT for authentication, and documenting APIs using Swagger and Postman</li>
                         <li>Optimized backend performance by tuning MySQL/PostgreSQL schemas, improving query speed by 30%, and deploying containerized applications on AWS (EC2, S3, Lambda) using Docker, Kubernetes, and CI/CD pipelines (Jenkins, GitHub Actions)</li>
@@ -221,14 +287,14 @@ function App() {
                 {/* Infosys */}
                 <div className="relative flex flex-col md:flex-row items-center md:items-start">
                   <div className="order-1 md:order-2 md:w-1/2 pl-10 mb-6 md:mb-0">
-                    <div className="hidden md:block absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div>
+                    {/* <div className="hidden md:block absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                     <h3 className="text-xl font-bold text-indigo-600">Java Full Stack Developer</h3>
                     <p className="text-gray-700 font-medium">Infosys</p>
                     <p className="text-gray-500">Jan 2022 – Dec 2022</p>
                   </div>
-                  <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div>
+                  {/* <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                   <div className="order-2 md:order-1 md:w-1/2 md:pr-10 md:text-right">
-                    <div className="bg-white p-5 rounded-lg shadow-sm">
+                    <div className="bg-white p-5 rounded-lg shadow-sm" data-aos="fade-left" data-aos-delay="200">
                       <ul className="list-disc list-inside text-gray-700 space-y-2 md:list-outside md:ml-auto">
                         <li>Developed scalable and efficient RESTful APIs using Spring Boot with MongoDB and PostgreSQL, improving response times by 30% and backend efficiency by 25%, while optimizing SQL and NoSQL queries across Oracle and DynamoDB</li>
                         <li>Implemented secure authentication and authorization using Spring Security, OAuth 2.0, and JWT; integrated Redis caching and connection pooling to reduce latency and enhance performance under high traffic</li>
@@ -244,14 +310,14 @@ function App() {
                 {/* Capgemini */}
                 <div className="relative flex flex-col md:flex-row items-center md:items-start">
                   <div className="order-1 md:order-1 md:w-1/2 pr-10 md:text-right mb-6 md:mb-0">
-                    <div className="hidden md:block absolute right-0 transform translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div>
+                    {/* <div className="hidden md:block absolute right-0 transform translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                     <h3 className="text-xl font-bold text-indigo-600">Java Developer</h3>
                     <p className="text-gray-700 font-medium">Capgemini</p>
                     <p className="text-gray-500">Mar 2019 – Jan 2022</p>
                   </div>
-                  <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div>
+                  {/* <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                   <div className="order-2 md:order-2 md:w-1/2 md:pl-10">
-                    <div className="bg-white p-5 rounded-lg shadow-sm">
+                    <div className="bg-white p-5 rounded-lg shadow-sm" data-aos="fade-right" data-aos-delay="200">
                       <ul className="list-disc list-inside text-gray-700 space-y-2">
                         <li>Developed scalable backend and full-stack applications using Java 11, Spring Boot, MongoDB, and React.js; enhanced system performance, maintainability, and frontend user experience across new and legacy components</li>
                         <li>Built and secured RESTful APIs with Spring Security (JWT) and role-based access control (RBAC) for sensitive financial workflows; integrated design patterns (DAO, DTO, Singleton) to support modular architecture</li>
@@ -266,15 +332,15 @@ function App() {
                 {/* Silicon Matrix */}
                 <div className="relative flex flex-col md:flex-row items-center md:items-start">
                   <div className="order-1 md:order-2 md:w-1/2 pl-10 mb-6 md:mb-0">
-                    <div className="hidden md:block absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div>
+                    {/* <div className="hidden md:block absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                     <h3 className="text-xl font-bold text-indigo-600">Software Engineer</h3>
                     <p className="text-gray-700 font-medium">Silicon Matrix</p>
                     <p className="text-gray-500">Jan 2018 – Feb 2019</p>
                   </div>
-                  <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div>
+                  {/* <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                   <div className="order-2 md:order-1 md:w-1/2 md:pr-10 md:text-right">
-                    <div className="bg-white p-5 rounded-lg shadow-sm">
-                      <ul className="list-disc list-inside text-gray-700 space-y-2 md:list-outside md:ml-auto">
+                    <div className="bg-white p-5 rounded-lg shadow-sm" data-aos="fade-left" data-aos-delay="200">
+                      <ul className="list-none list-inside text-gray-700 space-y-2 md:list-outside md:ml-auto">
                         <li>Developed and optimized MongoDB filter queries for efficient JSON data retrieval, improving performance by 30% and integrating the data seamlessly into the service layer</li>
                         <li>Built high-performance RESTful APIs using Node.js and implemented SPAs with React.js and Redux, leading to a 20% boost in user engagement and 15% faster page load times</li>
                         <li>Engineered reusable stateful and stateless React components, enhancing user experience by 25% and simplifying maintenance by 20% across frontend modules</li>
@@ -386,98 +452,77 @@ function App() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Featured Projects</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Project 1 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg">
-              <div className="h-48 bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white">
-                <div className="text-center">
-                  <h3 className="text-xl font-bold">NEU Social Networking Portal</h3>
-                  <p className="text-sm opacity-80">Full-stack Social Platform</p>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {/* Project Card */}
+            {[
+              {
+                title: "NEU Social Networking Portal",
+                subtitle: "Full-stack Social Platform",
+                description: "A full-stack application supporting live chat, user groups, role-based access control, and real-time updates via Firebase.",
+                stack: ["React", "Redux", "Java", "Spring Boot", "Firebase", "Semantic UI", "Spring Security"],
+                gradient: "from-indigo-500 to-purple-600",
+                url: "https://github.com/Aravind526/Norheastern-Social-Network/tree/main/Northeastern-Social-Network-main"
+              },
+              {
+                title: "Cloud-native Ridge REST API with AWS S3 Integration",
+                subtitle: "RESTful API Backend",
+                description: "Scalable Spring Boot REST API for user and image management, featuring AWS S3 file storage and PostgreSQL data integration.",
+                stack: ["Spring Boot", "PostgreSQL", "AWS S3", "Java", "Spring Security"],
+                gradient: "from-blue-500 to-teal-500",
+                url: "https://github.com/Aravind526/REST-API-with-AWS-S3-Integration"
+              },
+              {
+                title: "Netflix GPT",
+                subtitle: "AI-based Content Platform",
+                description: "Containerized AI-powered content platform using GPT, Docker, and Kubernetes with a modern React frontend.",
+                stack: ["React 18", "GPT", "Firebase", "Spring Cloud", "Docker", "Kubernetes"],
+                gradient: "from-pink-500 to-orange-500",
+                url: "https://github.com/Aravind526/netflix-gpt"
+              }
+            ].map((project, index) => (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                whileHover={{ scale: 1.03, rotate: [-0.5, 0.5, -0.5], transition: { duration: 0.4 } }}
+                className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-xl"
+              >
+                <div className={`h-48 bg-gradient-to-r ${project.gradient} flex items-center justify-center text-white`}>
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold">{project.title}</h3>
+                    <p className="text-sm opacity-80">{project.subtitle}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <p className="text-gray-700 mb-4">
-                  A full-stack application supporting live chat, user groups, role-based access control, and real-time updates via Firebase.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">React</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Redux</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Java</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Spring Boot</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Firebase</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Semantic UI</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Spring Security</span>
+                <div className="p-6">
+                  <p className="text-gray-700 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.stack.map((tech, i) => (
+                      <span key={i} className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">{tech}</span>
+                    ))}
+                  </div>
+                  <div className="flex space-x-3">
+                    <a href={project.url} className="text-indigo-600 hover:text-indigo-800 flex items-center" target="_blank" rel="noopener noreferrer">
+                      <GitHub size={16} className="mr-1" />
+                      <span>Code</span>
+                    </a>
+                  </div>
                 </div>
-                <div className="flex space-x-3">
-                  <a href="https://github.com/Aravind526/Norheastern-Social-Network/tree/main/Northeastern-Social-Network-main" className="text-indigo-600 hover:text-indigo-800 flex items-center">
-                    <GitHub size={16} className="mr-1" />
-                    <span>Code</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
+          </motion.div>
 
-            {/* Project 2 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg">
-              <div className="h-48 bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center text-white">
-                <div className="text-center">
-                  <h3 className="text-xl font-bold">Cloud-native Ridge REST API with AWS S3 Integration</h3>
-                  <p className="text-sm opacity-80">RESTful API Backend</p>
-                </div>
-              </div>
-              <div className="p-6">
-                <p className="text-gray-700 mb-4">
-                  Scalable Spring Boot REST API for user and image management, featuring AWS S3 file storage and PostgreSQL data integration.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Spring Boot</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">PostgreSQL</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">AWS S3</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Java</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Spring Security</span>
-                </div>
-                <div className="flex space-x-3">
-                  <a href="https://github.com/Aravind526/REST-API-with-AWS-S3-Integration" className="text-indigo-600 hover:text-indigo-800 flex items-center">
-                    <GitHub size={16} className="mr-1" />
-                    <span>Code</span>
-                  </a>
-                  
-                </div>
-              </div>
-            </div>
-
-            {/* Project 3 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg">
-              <div className="h-48 bg-gradient-to-r from-pink-500 to-orange-500 flex items-center justify-center text-white">
-                <div className="text-center">
-                  <h3 className="text-xl font-bold"> Netflix GPT </h3>
-                  <p className="text-sm opacity-80">AI-based Content Platform</p>
-                </div>
-              </div>
-              <div className="p-6">
-                <p className="text-gray-700 mb-4">
-                  Containerized AI-powered content platform using GPT, Docker, and Kubernetes with a modern React frontend.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">React 18</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">GPT</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Firebase</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Spring Cloud</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Docker</span>
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Kubernetes</span>
-                </div>
-                <div className="flex space-x-3">
-                  <a href="https://github.com/Aravind526/netflix-gpt" className="text-indigo-600 hover:text-indigo-800 flex items-center">
-                    <GitHub size={16} className="mr-1" />
-                    <span>Code</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-            
           <div className="mt-12 text-center">
-            <a href="https://github.com/Aravind526" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-indigo-600 hover:text-indigo-800">
+            <a
+              href="https://github.com/Aravind526"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-indigo-600 hover:text-indigo-800"
+            >
               <span>View more projects on GitHub</span>
               <ExternalLink size={16} className="ml-1" />
             </a>
