@@ -128,7 +128,7 @@ function App() {
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50 pt-20">
         {/* AWS Certified Badge in top-right corner */}
-        <div className="absolute top-24 right-24 md:top-28 md:right-32 z-10">
+        <div className="absolute top-24 right-24 md:top-28 md:right-32 z-0">
           <img
             src={`${import.meta.env.BASE_URL}aws_certified_image.png`} // or direct URL
             alt="AWS Certified Developer – Associate"
