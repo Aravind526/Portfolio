@@ -103,8 +103,8 @@ function App() {
 
         {/* Mobile Hamburger Button — on top right, floating above everything */}
         <div className="absolute top-6 right-6 md:hidden z-[999]">
-          <button onClick={toggleMenu} className="text-gray-700 hover:text-indigo-600 transition-colors duration-300">
-            <Menu size={28} />
+          <button className="md:hidden text-gray-600 z-50" onClick={toggleMenu}>
+            <Menu size={24} />
           </button>
         </div>
       </header>
