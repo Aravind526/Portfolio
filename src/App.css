@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global */
 html {
   scroll-behavior: smooth;
 }
@@ -16,9 +17,27 @@ body {
   to { width: 100%; }
 }
 
-/* #skills .bg-indigo-600 {
+.skill-bar-fill {
   animation: fillBar 1.5s ease-out forwards;
-} */
+}
+
+/* Fade-in up animation (used as fallback or custom animation) */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out forwards;
+}
 
 /* Hover effects for project cards */
 .project-card {
@@ -27,7 +46,16 @@ body {
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Floating AWS Badge utility */
+.floating-badge {
+  position: absolute;
+  z-index: 40;
+  top: 6rem;
+  right: 1rem;
 }
 
 /* Custom scrollbar */
@@ -48,12 +76,16 @@ body {
   background: #818cf8;
 }
 
-/* Smooth transitions */
+/* Smooth transitions for all buttons and links */
 a, button {
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-/* Gradient text effect */
+a:hover, button:hover {
+  transform: scale(1.02);
+}
+
+/* Gradient text utility */
 .gradient-text {
   background: linear-gradient(90deg, #4f46e5, #818cf8);
   -webkit-background-clip: text;
@@ -71,5 +103,12 @@ a, button {
   }
   h3 {
     font-size: 1.5rem;
+  }
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  button {
+    padding: 0.75rem 1.25rem;
   }
 }

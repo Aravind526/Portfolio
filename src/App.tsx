@@ -349,7 +349,7 @@ function App() {
                   {/* <div className="md:hidden absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white"></div> */}
                   <div className="order-2 md:order-1 md:w-1/2 md:pr-10 md:text-right">
                     <div className="bg-white p-5 rounded-lg shadow-sm" data-aos="fade-left" data-aos-delay="200">
-                      <ul className="list-none list-inside text-gray-700 space-y-2 md:list-outside md:ml-auto">
+                      <ul className="list-disc list-inside text-gray-700 space-y-2 md:list-outside md:ml-auto">
                         <li>Developed and optimized MongoDB filter queries for efficient JSON data retrieval, improving performance by 30% and integrating the data seamlessly into the service layer</li>
                         <li>Built high-performance RESTful APIs using Node.js and implemented SPAs with React.js and Redux, leading to a 20% boost in user engagement and 15% faster page load times</li>
                         <li>Engineered reusable stateful and stateless React components, enhancing user experience by 25% and simplifying maintenance by 20% across frontend modules</li>
