@@ -130,7 +130,7 @@ function App() {
         {/* AWS Certified Badge in top-right corner */}
         <div className="absolute top-24 right-24 md:top-28 md:right-32 z-10">
           <img
-            src="./public/aws_certified_image.png" // or direct URL
+            src={`${import.meta.env.BASE_URL}aws_certified_image.png`} // or direct URL
             alt="AWS Certified Developer – Associate"
             className="h-28 md:h-32 w-auto drop-shadow-xl hover:scale-105 transition-transform duration-300"
             title="AWS Certified Developer – Associate"
