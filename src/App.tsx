@@ -106,18 +106,21 @@ function App() {
       </header>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-white z-50 transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden`}>
+      <div className={`fixed inset-0 bg-white z-[60] transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden`}>
+        {/* Close Button */}
         <div className="flex justify-end p-4">
-          <button onClick={toggleMenu}>
-            <X size={24} className="text-gray-600" />
+          <button onClick={toggleMenu} className="z-50 relative">
+            <X size={28} className="text-gray-700 hover:text-indigo-600 transition-colors duration-300" />
           </button>
         </div>
+
+        {/* Navigation Items */}
         <nav className="flex flex-col items-center space-y-6 mt-20">
           {['Home', 'About', 'Experience', 'Skills', 'Projects', 'Contact'].map((item) => (
             <button
               key={item}
               onClick={() => scrollToSection(item.toLowerCase())}
-              className="text-xl text-gray-800 hover:text-indigo-600 transition-colors duration-300"
+              className="text-xl font-medium text-gray-800 hover:text-indigo-600 transition-colors duration-300"
             >
               {item}
             </button>
@@ -128,7 +131,7 @@ function App() {
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50 pt-20">
         {/* AWS Certified Badge in top-right corner */}
-        <div className="absolute top-24 right-24 md:top-28 md:right-32 z-0">
+        <div className="absolute top-24 right-4 md:top-28 md:right-32 z-10">
           <img
             src={`${import.meta.env.BASE_URL}aws_certified_image.png`} // or direct URL
             alt="AWS Certified Developer – Associate"
