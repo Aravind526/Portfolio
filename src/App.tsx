@@ -83,7 +83,13 @@ function App() {
       {/* Navigation */}
       <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
         <div className="container mx-auto px-4 flex justify-between items-center">
+          {/* Logo on the left */}
           <a href="#home" className="text-2xl font-bold text-indigo-600">Aravindstack.dev</a>
+
+          {/* Hamburger Menu on the right */}
+          <button className="md:hidden text-gray-600 z-50" onClick={toggleMenu}>
+            <Menu size={28} />
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
@@ -97,13 +103,9 @@ function App() {
               </button>
             ))}
           </nav>
-
-          {/* Mobile Menu Button */}
-          <button className="md:hidden text-gray-600" onClick={toggleMenu}>
-            <Menu size={24} />
-          </button>
         </div>
       </header>
+
 
       {/* Mobile Menu */}
       <div className={`fixed inset-0 bg-white z-[60] transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden`}>
