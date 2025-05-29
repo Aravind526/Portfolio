@@ -82,7 +82,7 @@ function App() {
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
       {/* Navigation */}
       {/* Navigation */}
-      <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+      <header className="fixed w-full z-50 bg-white shadow-md py-3 transition-all duration-300">
         <div className="relative container mx-auto px-4 flex justify-between items-center">
           {/* Logo on the left */}
           <a href="#home" className="text-2xl font-bold text-indigo-600">Aravindstack.dev</a>
