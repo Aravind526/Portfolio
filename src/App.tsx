@@ -386,9 +386,9 @@ function App() {
             <div className="bg-gray-50 rounded-lg p-6 shadow-sm transform transition-transform hover:scale-105">
               <h3 className="text-xl font-bold text-indigo-600 mb-4">Frontend Development</h3>
               <div className="space-y-3">
+                <SkillBar skill="Angular" percentage={90} />
                 <SkillBar skill="React.js" percentage={90} />
                 <SkillBar skill="JavaScript/TypeScript" percentage={85} />
-                <SkillBar skill="HTML/CSS" percentage={90} />
                 <SkillBar skill="Redux" percentage={80} />
                 <SkillBar skill="Tailwind CSS" percentage={80} />
               </div>
@@ -398,9 +398,8 @@ function App() {
             <div className="bg-gray-50 rounded-lg p-6 shadow-sm transform transition-transform hover:scale-105">
               <h3 className="text-xl font-bold text-indigo-600 mb-4">Backend Development</h3>
               <div className="space-y-3">
-                <SkillBar skill="Node.js" percentage={85} />
-                <SkillBar skill="Express.js" percentage={80} />
                 <SkillBar skill="Java/Spring Boot" percentage={90} />
+                <SkillBar skill="Node.js" percentage={85} />
                 <SkillBar skill="RESTful APIs" percentage={90} />
                 <SkillBar skill="GraphQL" percentage={60} />
               </div>
@@ -421,7 +420,7 @@ function App() {
             <div className="bg-gray-50 rounded-lg p-6 shadow-sm transform transition-transform hover:scale-105">
               <h3 className="text-xl font-bold text-indigo-600 mb-4">DevOps & Cloud</h3>
               <div className="space-y-3">
-                <SkillBar skill="AWS" percentage={85} />
+                <SkillBar skill="AWS" percentage={90} />
                 <SkillBar skill="Docker" percentage={80} />
                 <SkillBar skill="CI/CD" percentage={80} />
                 <SkillBar skill="Kubernetes" percentage={75} />
