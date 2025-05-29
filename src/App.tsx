@@ -81,15 +81,11 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
       {/* Navigation */}
+      {/* Navigation */}
       <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="relative container mx-auto px-4 flex justify-between items-center">
           {/* Logo on the left */}
           <a href="#home" className="text-2xl font-bold text-indigo-600">Aravindstack.dev</a>
-
-          {/* Hamburger Menu on the right */}
-          <button className="md:hidden text-gray-600 z-50" onClick={toggleMenu}>
-            <Menu size={28} />
-          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
@@ -104,7 +100,15 @@ function App() {
             ))}
           </nav>
         </div>
+
+        {/* Mobile Hamburger Button — on top right, floating above everything */}
+        <div className="absolute top-6 right-6 md:hidden z-[999]">
+          <button onClick={toggleMenu} className="text-gray-700 hover:text-indigo-600 transition-colors duration-300">
+            <Menu size={28} />
+          </button>
+        </div>
       </header>
+
 
 
       {/* Mobile Menu */}
